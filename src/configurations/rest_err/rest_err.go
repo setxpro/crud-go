@@ -5,7 +5,7 @@ import "net/http"
 type RestErr struct {
 	Message string   `json:"message"`
 	Err     string   `json:"err"`
-	Code    int64    `json:"code"`
+	Code    int      `json:"code"`
 	Causes  []Causes `json:"causes"`
 }
 
@@ -20,7 +20,7 @@ func (r *RestErr) Error() string {
 }
 
 // Construtor
-func NewRestErr(message, err string, code int64, cause []Causes) *RestErr {
+func NewRestErr(message, err string, code int, cause []Causes) *RestErr {
 	// *RestErr -> retorna um ponteiro de RestErr
 	return &RestErr{
 		Message: message,
