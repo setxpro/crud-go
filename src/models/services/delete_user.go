@@ -1,7 +1,7 @@
-package model
+package service
 
 import resterr "github.com/setxpro/crud-go/src/configurations/rest_err"
 
-func (*UserDomain) UpdateUser(string) *resterr.RestErr {
+func (*userDomainService) DeleteUser(string) *resterr.RestErr {
 	return nil
 }

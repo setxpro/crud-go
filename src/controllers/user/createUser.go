@@ -8,6 +8,7 @@ import (
 	validation "github.com/setxpro/crud-go/src/configurations/validations"
 	"github.com/setxpro/crud-go/src/controllers/model/request"
 	model "github.com/setxpro/crud-go/src/models"
+	service "github.com/setxpro/crud-go/src/models/services"
 	"go.uber.org/zap"
 )
 
@@ -34,10 +35,13 @@ func InsertUser(c *gin.Context) {
 
 	domain := model.NewUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
 
-	if err := domain.CreateUser(); err != nil {
+	service := service.NewUserDomainService()
+
+	if err := service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
+
 	logger.Info("User created successfully", zap.String("journey", "createUser"))
 
 	c.String(http.StatusOK, "")
