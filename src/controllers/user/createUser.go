@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	resterr "github.com/setxpro/crud-go/src/configurations/rest_err"
+	validation "github.com/setxpro/crud-go/src/configurations/validations"
 	"github.com/setxpro/crud-go/src/controllers/model/request"
 )
 
@@ -14,10 +14,9 @@ func InsertUser(c *gin.Context) {
 
 	// c ->
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
-		restErr := resterr.NewBadRequestError(
-			fmt.Sprintf("There are some incorrect fields, error=%s", err.Error()))
+		errRest := validation.ValidateUserError(err)
 
-		c.JSON(restErr.Code, restErr)
+		c.JSON(errRest.Code, errRest)
 		return
 	}
 
