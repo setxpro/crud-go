@@ -14,14 +14,11 @@ type Causes struct {
 	Message string `json:"message"`
 }
 
-// func para satisfazer a interface de error
 func (r *RestErr) Error() string {
 	return r.Message
 }
 
-// Construtor
 func NewRestErr(message, err string, code int, cause []Causes) *RestErr {
-	// *RestErr -> retorna um ponteiro de RestErr
 	return &RestErr{
 		Message: message,
 		Err:     err,
@@ -30,7 +27,6 @@ func NewRestErr(message, err string, code int, cause []Causes) *RestErr {
 	}
 }
 
-// Metodo para cada tipo de erro
 func NewBadRequestError(message string) *RestErr {
 	return &RestErr{
 		Message: message,

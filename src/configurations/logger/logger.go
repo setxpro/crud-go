@@ -8,7 +8,6 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-// Variável privada
 var (
 	log *zap.Logger
 
@@ -60,17 +59,12 @@ func getLevelLogs() zapcore.Level {
 	}
 }
 
-// Metodos para disponibilizar essa configuração
-
-// 3 pontos antes do tipo da variável -> Quantas vezes eu quiser passar ele por parametro
-// 3 pontos depois da variável -> passando toda referencia daquela variável
-
 func Info(message string, tags ...zap.Field) {
 	log.Info(message, tags...)
-	log.Sync() // Sincronização do log
+	log.Sync()
 }
 func Error(message string, err error, tags ...zap.Field) {
-	tags = append(tags, zap.NamedError("error", err)) // add a new field error
+	tags = append(tags, zap.NamedError("error", err))
 	log.Info(message, tags...)
-	log.Sync() // Sincronização do log
+	log.Sync()
 }

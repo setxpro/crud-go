@@ -43,7 +43,6 @@ func ValidateUserError(validation_err error) *resterr.RestErr {
 		// array causes
 		errorsCauses := []resterr.Causes{}
 
-		// _ -> ignore the first param
 		for _, e := range validation_err.(validator.ValidationErrors) {
 			causse := resterr.Causes{
 				Message: e.Translate(transl),
